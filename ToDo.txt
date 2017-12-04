@@ -1,0 +1,20 @@
+
+Initialization:
+    Display Loading div/label
+    Load configuration xml
+    Load recipe xml
+    For each orderline/containertype:
+        (read orderline data from xml)
+        Create "default" mesh based on LxWxH (and maybe top/bottom nonsupport border)
+    Create scenes/views/divs
+    Show divs/views
+    Hide loading div/label
+
+After everything has loaded and is now visible on screen:
+    For each orderline/containertype:
+        If <model> is defined, start loading that model3D (do a request)
+            => OnLoadingComplete(): replaces the "default" mesh
+            => OnLoadingError(): ? ignore?
+
+LINKS:
+

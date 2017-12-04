@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="utf-8"?>
+<recipe type="IPS">
+  <order type="ips" id="" code="Rimobel">
+	<orderinfo>
+		<modules>CSA, PARCEL, MPS, FREE:FAMILYHANDLING</modules>
+	</orderinfo>
+	<parameterlist>
+		<parameter name="AllowOverhang" value="1"/>
+		<parameter name="AllowPartialLabelSide" value="0"/>
+		<parameter name="AllowXYRotation" value="1"/>
+		<parameter name="AllowZRotation" value="1"/>
+		<parameter name="CustomerRequirementCode" value=""/>
+		<parameter name="ForceLabelVisible" value="0"/>
+		<parameter name="ForcePackagesVisible" value="0"/>
+		<parameter name="MaxCalculationTime" value="999999999"/>
+		<parameter name="MaxOverhang" value="1100"/>
+		<parameter name="MaxBranchCount" value="30"/>
+		<parameter name="MaxContainerHeight" value="1200"/>
+		<parameter name="MaxContainerWeight" value="99999999"/>
+		<parameter name="MaxWeightOnTopFactor" value="100000"/>
+		<parameter name="ShiftDirection" value="0"/>
+		<parameter name="SideBinCount" value="0"/>
+		<parameter name="UseStackClasses" value="1"/>
+		<parameter name="Relaxation_MaxContainerHeight" value="0"/>
+		<parameter name="Relaxation_MaxContainerWeight" value="0"/>
+		<parameter name="Relaxation_MaxWeightOnTop" value="0"/>
+		<parameter name="Relaxation_ModelCodeVisible" value="0"/>
+		<parameter name="Relaxation_Overhang" value="0"/>
+		<parameter name="Relaxation_ProductGrouping" value="0"/>
+		<parameter name="Relaxation_ProductProximity" value="0"/>
+		<parameter name="AllowParcelShipment" value="0"/>
+		<parameter name="MaxParcelCount" value="5"/>
+		<parameter name="MaxParcelWeight" value="9999999"/>
+		<parameter name="MaxParcelVolume" value="9999999"/>
+		<parameter name="CarrierCostWeight" value="0"/>
+		<parameter name="DifferentCarrierStopCostWeight" value="0"/>
+		<parameter name="LocationCodeStart" value="0"/>
+		<parameter name="LocationCodeStop" value="0"/>
+		<parameter name="MaxPickDistance" value="0"/>
+		<parameter name="ParkInFrontOfLevelPick" value="0"/>
+		<parameter name="PickerCostWeight" value="0"/>
+		<parameter name="MaxCarriersExceeded" value="10"/>
+		<parameter name="NormCarrierCount" value="10"/>
+		<parameter name="ScoreWeight_Carrier" value="50"/>
+		<parameter name="ScoreWeight_Efficiency" value="1000"/>
+		<parameter name="ScoreWeight_FamilySpread" value="10"/>
+		<parameter name="ScoreWeight_OrderlineSpread" value="0"/>
+		<parameter name="ScoreWeight_Stability" value="15"/>
+		<parameter name="ScoreWeight_StackDensity" value="25"/>
+		<parameter name="MinSupport" value="50"/>
+		<parameter name="RequiredAngle" value="10"/>
+		<parameter name="StableAngle" value="30"/>
+		<parameter name="SpacingMethod" value="0"/>
+		<parameter name="score_combiheight" value="0"/>
+		<parameter name="score_complexity" value="0"/>
+		<parameter name="score_efficiency" value="0"/>
+		<parameter name="score_orderlinegrouping" value="1000"/>
+		<parameter name="score_packagearea" value="1000"/>
+		<parameter name="score_relativevolume" value="300"/>
+		<parameter name="score_smartheight" value="10"/>
+		<parameter name="score_stability" value="500"/>
+		<parameter name="score_stackability" value="20"/>
+		<parameter name="score_support" value="100"/>
+	</parameterlist>
+	<containertypelist>
+	<!-- Order: carrier size -->
+		<containertype id="33" code="EUR120X080" type="PALLET" category="PALLET_STANDARD">
+			<contentsize length="1200" width="800" height="2055"/>
+			<physicalsize length="1200" width="800" height="145"/>
+			<contentoffset deltax="0" deltay="0" deltaz="145"/>
+			<maxcontentweight>3750000</maxcontentweight>
+			<overhang direction="9" max="500"/>
+		</containertype>
+	</containertypelist>
+	<!-- package order line -->
+	<orderlinelist>
+		<orderline productcode="R001_CU" groupcode="1" typecode="box" contentcode="R001" contentamount="1" orderamount="8">
+			<name>R001</name>
+			<description>Zapatero</description>
+			<size length="1860" width="510" height="60"/>
+			<weight>30000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="300000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="30" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R002_CU" groupcode="1" typecode="box" contentcode="R002" contentamount="1" orderamount="5">
+			<name>R002</name>
+			<description>Multiusos 1 p.</description>
+			<size length="1860" width="380" height="70"/>
+			<weight>25000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="250000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R003_CU" groupcode="1" typecode="box" contentcode="R003" contentamount="1" orderamount="4">
+			<name>R003</name>
+			<description>Mesita 2 C.</description>
+			<size length="500" width="380" height="90"/>
+			<weight>12000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="120000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R004_CU" groupcode="1" typecode="box" contentcode="R004" contentamount="1" orderamount="2">
+			<name>R004</name>
+			<description>Armario 2 P.</description>
+			<size length="1860" width="510" height="120"/>
+			<weight>48000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="480000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R005_CU" groupcode="1" typecode="box" contentcode="R005" contentamount="1" orderamount="9">
+			<name>R005</name>
+			<description>Ba?o 80-2P.</description>
+			<size length="800" width="600" height="150"/>
+			<weight>40000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="400000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R006_CU" groupcode="1" typecode="box" contentcode="R006" contentamount="1" orderamount="4">
+			<name>R006</name>
+			<description>Estanteria 1</description>
+			<size length="1700" width="250" height="120"/>
+			<weight>30000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="300000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R007_CU" groupcode="1" typecode="box" contentcode="R007" contentamount="1" orderamount="1">
+			<name>R007</name>
+			<description>Mesa centro 1</description>
+			<size length="900" width="510" height="65"/>
+			<weight>20000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="200000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R008_CU" groupcode="1" typecode="box" contentcode="R008" contentamount="1" orderamount="2">
+			<name>R008</name>
+			<description>Salon 1</description>
+			<size length="2000" width="510" height="110"/>
+			<weight>50000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="500000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R009_CU" groupcode="1" typecode="box" contentcode="R009" contentamount="1" orderamount="0">
+			<name>R009</name>
+			<description>Cabezal + 2 mesitas</description>
+			<size length="2000" width="510" height="90"/>
+			<weight>40000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="400000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R010_CU" groupcode="1" typecode="box" contentcode="R010" contentamount="1" orderamount="6">
+			<name>R010</name>
+			<description>Canape 135</description>
+			<size length="2000" width="350" height="120"/>
+			<weight>40000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>500</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="400000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R011_CU" groupcode="1" typecode="box" contentcode="R011" contentamount="1" orderamount="4">
+			<name>R011</name>
+			<description>Escritorio Juvenil</description>
+			<size length="960" width="510" height="70"/>
+			<weight>20000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="200000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R012_CU" groupcode="1" typecode="box" contentcode="R012" contentamount="1" orderamount="5">
+			<name>R012</name>
+			<description>Comoda 3 C.</description>
+			<size length="900" width="400" height="120"/>
+			<weight>30000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="300000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R013_CU" groupcode="1" typecode="box" contentcode="R013" contentamount="1" orderamount="6">
+			<name>R013</name>
+			<description>Modulo TV</description>
+			<size length="1400" width="400" height="80"/>
+			<weight>25000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="250000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+		<orderline productcode="R014_CU" groupcode="1" typecode="box" contentcode="R014" contentamount="1" orderamount="7">
+			<name>R014</name>
+			<description>Zapatero 2 P.</description>
+			<size length="860" width="420" height="100"/>
+			<weight>25000</weight>
+			<needsbox>0</needsbox>
+			<maxoverhang>200</maxoverhang>
+			<stackinginfo stackingclass="2" maxweightontop="250000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="30" rotationxscore="0" rotationyscore="0"/>
+		</orderline>
+	</orderlinelist>
+</order>
+  <recipestatistics>
+  <statistic name="avgfillratio" value="0.588627838605" />
+  <statistic name="calculationtime" value="28656" />
+  <statistic name="calcversion" value="v4.20.00036" />
+  <statistic name="carrierscore" value="0.512003333333" />
+  <statistic name="containercount" value="3" />
+  <statistic name="efficiencyscore" value="1.000000000000" />
+  <statistic name="expectedcarriercount" value="1" />
+  <statistic name="expectedcontainercount" value="1" />
+  <statistic name="familyspreadscore" value="1.000000000000" />
+  <statistic name="finalcontainercount" value="3" />
+  <statistic name="footprint" value="8156000" />
+  <statistic name="ipscalcversion" value="v4.20.00036" />
+  <statistic name="labelvisibilityscore" value="1.000000000000" />
+  <statistic name="loadmeters" value="8156000" />
+  <statistic name="orderlinespreadscore" value="1.000000000000" />
+  <statistic name="packagevisibilityscore" value="1.000000000000" />
+  <statistic name="performanceset" value="-1" />
+  <statistic name="recipescore" value="0.977245722161" />
+  <statistic name="stabilityscore" value="0.831190405517" />
+  <statistic name="stackdensityscore" value="1.076090865088" />
+  <statistic name="strappabilityscore" value="0.739283598676" />
+  <statistic name="totalfootprint" value="8156000" />
+  <statistic name="totalvolume" value="5877780000" />
+  <statistic name="volume" value="5877780000" />
+  </recipestatistics>
+  <containerrecipelist>
+  <containerrecipe index="0"  containertypecode="EUR120X080" >
+    <containerstatistics>
+    <statistic name="containerscore" value="0.831190405517" />
+    <statistic name="efficiencyscore" value="1.000000000000" />
+    <statistic name="familycount" value="1" />
+    <statistic name="fillratiomax" value="0.598023114355" />
+    <statistic name="fillratiotop" value="1.126632831508" />
+    <statistic name="footprint" value="3093200" />
+    <statistic name="instructionstepcount" value="14" />
+    <statistic name="isfinalcontainer" value="1" />
+    <statistic name="labelvisibilityscore" value="1.000000000000" />
+    <statistic name="packagecount" value="23" />
+    <statistic name="packagevisibilityscore" value="1.000000000000" />
+    <statistic name="packagevolume" value="1179780000" />
+    <statistic name="packageweight" value="683000" />
+    <statistic name="stabilityscore" value="0.831190405517" />
+    <statistic name="strappabilityscore" value="0.512694703510" />
+    <statistic name="topheight" value="560" />
+    <statistic name="totalcontentamount" value="23" />
+    <statistic name="totalheight" value="705" />
+    <statistic name="totallength" value="2035" />
+    <statistic name="totalvolume" value="2180706000" />
+    <statistic name="totalweight" value="683000" />
+    <statistic name="totalwidth" value="1520" />
+    </containerstatistics>
+    <instructionlist>
+	<instruction index="1" typecode="PickP" locationcode="" orderlineid="0" productcode="R005_CU" amount="4" packageindexlist="0,1,2,3"/>
+	<instruction index="2" typecode="PickP" locationcode="" orderlineid="0" productcode="R005_CU" amount="5" packageindexlist="4,5,6,7,8"/>
+	<instruction index="3" typecode="PickP" locationcode="" orderlineid="0" productcode="R002_CU" amount="4" packageindexlist="9,10,11,12"/>
+	<instruction index="4" typecode="PickP" locationcode="" orderlineid="0" productcode="R012_CU" amount="1" packageindexlist="13"/>
+	<instruction index="5" typecode="PickP" locationcode="" orderlineid="0" productcode="R003_CU" amount="1" packageindexlist="14"/>
+	<instruction index="6" typecode="PickP" locationcode="" orderlineid="0" productcode="R012_CU" amount="1" packageindexlist="15"/>
+	<instruction index="7" typecode="PickP" locationcode="" orderlineid="0" productcode="R003_CU" amount="1" packageindexlist="16"/>
+	<instruction index="8" typecode="PickP" locationcode="" orderlineid="0" productcode="R012_CU" amount="1" packageindexlist="17"/>
+	<instruction index="9" typecode="PickP" locationcode="" orderlineid="0" productcode="R003_CU" amount="1" packageindexlist="18"/>
+	<instruction index="10" typecode="PickP" locationcode="" orderlineid="0" productcode="R012_CU" amount="1" packageindexlist="19"/>
+	<instruction index="11" typecode="PickP" locationcode="" orderlineid="0" productcode="R003_CU" amount="1" packageindexlist="20"/>
+	<instruction index="12" typecode="PickP" locationcode="" orderlineid="0" productcode="R012_CU" amount="1" packageindexlist="21"/>
+	<instruction index="13" typecode="PickP" locationcode="" orderlineid="0" productcode="R002_CU" amount="1" packageindexlist="22"/>
+</instructionlist>
+    <physicalresult>
+	<package index="0" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="-560" y="-718" z="0"/>
+		<extent x="40" y="82" z="150"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.517857"/>
+	</package>
+	<package index="1" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="40" y="-718" z="0"/>
+		<extent x="640" y="82" z="150"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.517857"/>
+	</package>
+	<package index="2" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="-560" y="82" z="0"/>
+		<extent x="40" y="882" z="150"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.517857"/>
+	</package>
+	<package index="3" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="40" y="82" z="0"/>
+		<extent x="640" y="882" z="150"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.517857"/>
+	</package>
+	<package index="4" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="-560" y="-1018" z="150"/>
+		<extent x="40" y="-218" z="300"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.631579"/>
+	</package>
+	<package index="5" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="40" y="-1018" z="150"/>
+		<extent x="640" y="-218" z="300"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.631579"/>
+	</package>
+	<package index="6" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="-160" y="-218" z="150"/>
+		<extent x="640" y="382" z="300"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="400000000" stability="1.000000"/>
+	</package>
+	<package index="7" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="-760" y="-68" z="150"/>
+		<extent x="-160" y="732" z="300"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.678571"/>
+	</package>
+	<package index="8" typecode="BOX" orderlineid="0" productcode="R005_CU">
+		<position x="-160" y="382" z="150"/>
+		<extent x="640" y="982" z="300"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="400000000" stability="0.857143"/>
+	</package>
+	<package index="9" typecode="BOX" orderlineid="0" productcode="R002_CU">
+		<position x="0" y="-948" z="300"/>
+		<extent x="380" y="912" z="370"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="10" typecode="BOX" orderlineid="0" productcode="R002_CU">
+		<position x="380" y="-948" z="300"/>
+		<extent x="760" y="912" z="370"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="0.705882"/>
+	</package>
+	<package index="11" typecode="BOX" orderlineid="0" productcode="R002_CU">
+		<position x="-760" y="-878" z="300"/>
+		<extent x="-380" y="982" z="370"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="0.758840"/>
+	</package>
+	<package index="12" typecode="BOX" orderlineid="0" productcode="R002_CU">
+		<position x="-380" y="-878" z="300"/>
+		<extent x="0" y="982" z="370"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="0.962912"/>
+	</package>
+	<package index="13" typecode="BOX" orderlineid="0" productcode="R012_CU">
+		<position x="-140" y="-983" z="370"/>
+		<extent x="760" y="-583" z="490"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="300000000" stability="0.944767"/>
+	</package>
+	<package index="14" typecode="BOX" orderlineid="0" productcode="R003_CU">
+		<position x="-640" y="-708" z="370"/>
+		<extent x="-140" y="-328" z="460"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="120000000" stability="1.000000"/>
+	</package>
+	<package index="15" typecode="BOX" orderlineid="0" productcode="R012_CU">
+		<position x="-140" y="-583" z="370"/>
+		<extent x="760" y="-183" z="490"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="16" typecode="BOX" orderlineid="0" productcode="R003_CU">
+		<position x="-640" y="-328" z="370"/>
+		<extent x="-140" y="52" z="460"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="120000000" stability="1.000000"/>
+	</package>
+	<package index="17" typecode="BOX" orderlineid="0" productcode="R012_CU">
+		<position x="-140" y="-183" z="370"/>
+		<extent x="760" y="217" z="490"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="18" typecode="BOX" orderlineid="0" productcode="R003_CU">
+		<position x="-640" y="52" z="370"/>
+		<extent x="-140" y="432" z="460"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="120000000" stability="1.000000"/>
+	</package>
+	<package index="19" typecode="BOX" orderlineid="0" productcode="R012_CU">
+		<position x="-140" y="217" z="370"/>
+		<extent x="760" y="617" z="490"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="20" typecode="BOX" orderlineid="0" productcode="R003_CU">
+		<position x="-640" y="432" z="370"/>
+		<extent x="-140" y="812" z="460"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="120000000" stability="1.000000"/>
+	</package>
+	<package index="21" typecode="BOX" orderlineid="0" productcode="R012_CU">
+		<position x="-140" y="617" z="370"/>
+		<extent x="760" y="1017" z="490"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="300000000" stability="0.874677"/>
+	</package>
+	<package index="22" typecode="BOX" orderlineid="0" productcode="R002_CU">
+		<position x="-130" y="-913" z="490"/>
+		<extent x="250" y="947" z="560"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+</physicalresult>
+    <containercontentlist>
+	<containercontentitem type="PRODUCT" productcode="R002_CU" subordercode="" packagingtype="" amount="5"/>
+	<containercontentitem type="PRODUCT" productcode="R005_CU" subordercode="" packagingtype="" amount="9"/>
+	<containercontentitem type="PRODUCT" productcode="R012_CU" subordercode="" packagingtype="" amount="5"/>
+	<containercontentitem type="PRODUCT" productcode="R003_CU" subordercode="" packagingtype="" amount="4"/>
+</containercontentlist>
+  </containerrecipe>
+  <containerrecipe index="1"  containertypecode="EUR120X080" >
+    <containerstatistics>
+    <statistic name="containerscore" value="0.873798320474" />
+    <statistic name="efficiencyscore" value="1.000000000000" />
+    <statistic name="familycount" value="1" />
+    <statistic name="fillratiomax" value="0.585863746959" />
+    <statistic name="fillratiotop" value="1.103725451860" />
+    <statistic name="footprint" value="2932800" />
+    <statistic name="instructionstepcount" value="9" />
+    <statistic name="isfinalcontainer" value="1" />
+    <statistic name="labelvisibilityscore" value="1.000000000000" />
+    <statistic name="packagecount" value="20" />
+    <statistic name="packagevisibilityscore" value="1.000000000000" />
+    <statistic name="packagevolume" value="1155792000" />
+    <statistic name="packageweight" value="606000" />
+    <statistic name="stabilityscore" value="0.873798320474" />
+    <statistic name="strappabilityscore" value="0.791508729880" />
+    <statistic name="topheight" value="560" />
+    <statistic name="totalcontentamount" value="20" />
+    <statistic name="totalheight" value="705" />
+    <statistic name="totallength" value="2080" />
+    <statistic name="totalvolume" value="2067624000" />
+    <statistic name="totalweight" value="606000" />
+    <statistic name="totalwidth" value="1410" />
+    </containerstatistics>
+    <instructionlist>
+	<instruction index="1" typecode="PickP" locationcode="" orderlineid="0" productcode="R004_CU" amount="2" packageindexlist="0,1"/>
+	<instruction index="2" typecode="PickP" locationcode="" orderlineid="0" productcode="R013_CU" amount="5" packageindexlist="2,3,4,5,6"/>
+	<instruction index="3" typecode="PickP" locationcode="" orderlineid="0" productcode="R006_CU" amount="4" packageindexlist="7,8,9,10"/>
+	<instruction index="4" typecode="PickP" locationcode="" orderlineid="0" productcode="R013_CU" amount="1" packageindexlist="11"/>
+	<instruction index="5" typecode="PickP" locationcode="" orderlineid="0" productcode="R001_CU" amount="2" packageindexlist="12,13"/>
+	<instruction index="6" typecode="PickP" locationcode="" orderlineid="0" productcode="R001_CU" amount="2" packageindexlist="14,15"/>
+	<instruction index="7" typecode="PickP" locationcode="" orderlineid="0" productcode="R001_CU" amount="2" packageindexlist="16,17"/>
+	<instruction index="8" typecode="PickP" locationcode="" orderlineid="0" productcode="R001_CU" amount="2" packageindexlist="18,19"/>
+</instructionlist>
+    <physicalresult>
+	<package index="0" typecode="BOX" orderlineid="0" productcode="R004_CU">
+		<position x="-505" y="-890" z="0"/>
+		<extent x="5" y="970" z="120"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="480000000" stability="0.533084"/>
+	</package>
+	<package index="1" typecode="BOX" orderlineid="0" productcode="R004_CU">
+		<position x="5" y="-890" z="0"/>
+		<extent x="515" y="970" z="120"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="480000000" stability="0.533084"/>
+	</package>
+	<package index="2" typecode="BOX" orderlineid="0" productcode="R013_CU">
+		<position x="-695" y="-960" z="120"/>
+		<extent x="705" y="-560" z="200"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="0.645833"/>
+	</package>
+	<package index="3" typecode="BOX" orderlineid="0" productcode="R013_CU">
+		<position x="-695" y="-560" z="120"/>
+		<extent x="705" y="-160" z="200"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="0.750000"/>
+	</package>
+	<package index="4" typecode="BOX" orderlineid="0" productcode="R013_CU">
+		<position x="-695" y="-160" z="120"/>
+		<extent x="705" y="240" z="200"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="0.750000"/>
+	</package>
+	<package index="5" typecode="BOX" orderlineid="0" productcode="R013_CU">
+		<position x="-695" y="240" z="120"/>
+		<extent x="705" y="640" z="200"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="0.750000"/>
+	</package>
+	<package index="6" typecode="BOX" orderlineid="0" productcode="R013_CU">
+		<position x="-695" y="640" z="120"/>
+		<extent x="705" y="1040" z="200"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="0.645833"/>
+	</package>
+	<package index="7" typecode="BOX" orderlineid="0" productcode="R006_CU">
+		<position x="-695" y="-960" z="200"/>
+		<extent x="-445" y="740" z="320"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="8" typecode="BOX" orderlineid="0" productcode="R006_CU">
+		<position x="-445" y="-960" z="200"/>
+		<extent x="-195" y="740" z="320"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="9" typecode="BOX" orderlineid="0" productcode="R006_CU">
+		<position x="-195" y="-960" z="200"/>
+		<extent x="55" y="740" z="320"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="10" typecode="BOX" orderlineid="0" productcode="R006_CU">
+		<position x="55" y="-960" z="200"/>
+		<extent x="305" y="740" z="320"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="11" typecode="BOX" orderlineid="0" productcode="R013_CU">
+		<position x="305" y="-960" z="200"/>
+		<extent x="705" y="440" z="280"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="12" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-705" y="-1040" z="320"/>
+		<extent x="-195" y="820" z="380"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="0.934066"/>
+	</package>
+	<package index="13" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-195" y="-1040" z="320"/>
+		<extent x="315" y="820" z="380"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="0.934066"/>
+	</package>
+	<package index="14" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-705" y="-1040" z="380"/>
+		<extent x="-195" y="820" z="440"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="15" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-195" y="-1040" z="380"/>
+		<extent x="315" y="820" z="440"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="16" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-705" y="-1040" z="440"/>
+		<extent x="-195" y="820" z="500"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="17" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-195" y="-1040" z="440"/>
+		<extent x="315" y="820" z="500"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="18" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-705" y="-1040" z="500"/>
+		<extent x="-195" y="820" z="560"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+	<package index="19" typecode="BOX" orderlineid="0" productcode="R001_CU">
+		<position x="-195" y="-1040" z="500"/>
+		<extent x="315" y="820" z="560"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="300000000" stability="1.000000"/>
+	</package>
+</physicalresult>
+    <containercontentlist>
+	<containercontentitem type="PRODUCT" productcode="R001_CU" subordercode="" packagingtype="" amount="8"/>
+	<containercontentitem type="PRODUCT" productcode="R013_CU" subordercode="" packagingtype="" amount="6"/>
+	<containercontentitem type="PRODUCT" productcode="R006_CU" subordercode="" packagingtype="" amount="4"/>
+	<containercontentitem type="PRODUCT" productcode="R004_CU" subordercode="" packagingtype="" amount="2"/>
+</containercontentlist>
+  </containerrecipe>
+  <containerrecipe index="2"  containertypecode="EUR120X080" >
+    <containerstatistics>
+    <statistic name="containerscore" value="0.898881421209" />
+    <statistic name="efficiencyscore" value="1.000000000000" />
+    <statistic name="familycount" value="1" />
+    <statistic name="fillratiomax" value="0.581996654501" />
+    <statistic name="fillratiotop" value="0.990333016933" />
+    <statistic name="footprint" value="2130000" />
+    <statistic name="instructionstepcount" value="8" />
+    <statistic name="isfinalcontainer" value="1" />
+    <statistic name="labelvisibilityscore" value="1.000000000000" />
+    <statistic name="packagecount" value="20" />
+    <statistic name="packagevisibilityscore" value="1.000000000000" />
+    <statistic name="packagevolume" value="1148163000" />
+    <statistic name="packageweight" value="615000" />
+    <statistic name="stabilityscore" value="0.898881421209" />
+    <statistic name="strappabilityscore" value="0.913647362638" />
+    <statistic name="topheight" value="620" />
+    <statistic name="totalcontentamount" value="20" />
+    <statistic name="totalheight" value="765" />
+    <statistic name="totallength" value="2000" />
+    <statistic name="totalvolume" value="1629450000" />
+    <statistic name="totalweight" value="615000" />
+    <statistic name="totalwidth" value="1065" />
+    </containerstatistics>
+    <instructionlist>
+	<instruction index="1" typecode="PickP" locationcode="" orderlineid="0" productcode="R011_CU" amount="4" packageindexlist="0,1,2,3"/>
+	<instruction index="2" typecode="PickP" locationcode="" orderlineid="0" productcode="R010_CU" amount="3" packageindexlist="4,5,6"/>
+	<instruction index="3" typecode="PickP" locationcode="" orderlineid="0" productcode="R008_CU" amount="2" packageindexlist="7,8"/>
+	<instruction index="4" typecode="PickP" locationcode="" orderlineid="0" productcode="R010_CU" amount="3" packageindexlist="9,10,11"/>
+	<instruction index="5" typecode="PickP" locationcode="" orderlineid="0" productcode="R007_CU" amount="1" packageindexlist="12"/>
+	<instruction index="6" typecode="PickP" locationcode="" orderlineid="0" productcode="R014_CU" amount="4" packageindexlist="13,14,15,16"/>
+	<instruction index="7" typecode="PickP" locationcode="" orderlineid="0" productcode="R014_CU" amount="3" packageindexlist="17,18,19"/>
+</instructionlist>
+    <physicalresult>
+	<package index="0" typecode="BOX" orderlineid="0" productcode="R011_CU">
+		<position x="-503" y="-960" z="0"/>
+		<extent x="7" y="0" z="70"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="200000000" stability="0.509713"/>
+	</package>
+	<package index="1" typecode="BOX" orderlineid="0" productcode="R011_CU">
+		<position x="7" y="-960" z="0"/>
+		<extent x="517" y="0" z="70"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="200000000" stability="0.509713"/>
+	</package>
+	<package index="2" typecode="BOX" orderlineid="0" productcode="R011_CU">
+		<position x="-503" y="0" z="0"/>
+		<extent x="7" y="960" z="70"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="200000000" stability="0.509713"/>
+	</package>
+	<package index="3" typecode="BOX" orderlineid="0" productcode="R011_CU">
+		<position x="7" y="0" z="0"/>
+		<extent x="517" y="960" z="70"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="200000000" stability="0.509713"/>
+	</package>
+	<package index="4" typecode="BOX" orderlineid="0" productcode="R010_CU">
+		<position x="-518" y="-1000" z="70"/>
+		<extent x="-168" y="1000" z="190"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.979592"/>
+	</package>
+	<package index="5" typecode="BOX" orderlineid="0" productcode="R010_CU">
+		<position x="-168" y="-1000" z="70"/>
+		<extent x="182" y="1000" z="190"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.979592"/>
+	</package>
+	<package index="6" typecode="BOX" orderlineid="0" productcode="R010_CU">
+		<position x="182" y="-1000" z="70"/>
+		<extent x="532" y="1000" z="190"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="0.979592"/>
+	</package>
+	<package index="7" typecode="BOX" orderlineid="0" productcode="R008_CU">
+		<position x="-518" y="-1000" z="190"/>
+		<extent x="-8" y="1000" z="300"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="500000000" stability="1.000000"/>
+	</package>
+	<package index="8" typecode="BOX" orderlineid="0" productcode="R008_CU">
+		<position x="-8" y="-1000" z="190"/>
+		<extent x="502" y="1000" z="300"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="500000000" stability="1.000000"/>
+	</package>
+	<package index="9" typecode="BOX" orderlineid="0" productcode="R010_CU">
+		<position x="-533" y="-1000" z="300"/>
+		<extent x="-183" y="1000" z="420"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="1.000000"/>
+	</package>
+	<package index="10" typecode="BOX" orderlineid="0" productcode="R010_CU">
+		<position x="-183" y="-1000" z="300"/>
+		<extent x="167" y="1000" z="420"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="1.000000"/>
+	</package>
+	<package index="11" typecode="BOX" orderlineid="0" productcode="R010_CU">
+		<position x="167" y="-1000" z="300"/>
+		<extent x="517" y="1000" z="420"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="400000000" stability="1.000000"/>
+	</package>
+	<package index="12" typecode="BOX" orderlineid="0" productcode="R007_CU">
+		<position x="-533" y="-1000" z="420"/>
+		<extent x="367" y="-490" z="485"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="200000000" stability="1.000000"/>
+	</package>
+	<package index="13" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-533" y="-490" z="420"/>
+		<extent x="327" y="-70" z="520"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="14" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-428" y="140" z="420"/>
+		<extent x="-8" y="1000" z="520"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="15" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-8" y="140" z="420"/>
+		<extent x="412" y="1000" z="520"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="16" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-513" y="-955" z="485"/>
+		<extent x="347" y="-535" z="585"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="17" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-533" y="-490" z="520"/>
+		<extent x="327" y="-70" z="620"/>
+		<rotation x="0" y="0" z="90"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="18" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-428" y="140" z="520"/>
+		<extent x="-8" y="1000" z="620"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+	<package index="19" typecode="BOX" orderlineid="0" productcode="R014_CU">
+		<position x="-8" y="140" z="520"/>
+		<extent x="412" y="1000" z="620"/>
+		<rotation x="0" y="0" z="0"/>
+		<statistics remainingweightontop="250000000" stability="1.000000"/>
+	</package>
+</physicalresult>
+    <containercontentlist>
+	<containercontentitem type="PRODUCT" productcode="R014_CU" subordercode="" packagingtype="" amount="7"/>
+	<containercontentitem type="PRODUCT" productcode="R010_CU" subordercode="" packagingtype="" amount="6"/>
+	<containercontentitem type="PRODUCT" productcode="R008_CU" subordercode="" packagingtype="" amount="2"/>
+	<containercontentitem type="PRODUCT" productcode="R007_CU" subordercode="" packagingtype="" amount="1"/>
+	<containercontentitem type="PRODUCT" productcode="R011_CU" subordercode="" packagingtype="" amount="4"/>
+</containercontentlist>
+  </containerrecipe>
+  </containerrecipelist>
+</recipe>

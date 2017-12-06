@@ -1,0 +1,79 @@
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	color: #000;
+	font-family: Verdana, sans-serif;
+}
+content {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#statusLabel {
+	height: 3.5em;
+	width: 30%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	/* background-color: #aaa;
+	font-size: 1.5em;
+	text-align: center;
+	overflow: hidden;
+	margin: auto;
+	padding: 0;
+	border-radius: 1em; */
+}
+#statuslabel p:before {
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+#containerpreviews {
+	width: auto;
+	height: 100vh;
+	background-color: #fff;
+	overflow: auto;
+}
+.containerpreview  {
+	height: 400px;
+	width: 300px;
+	background-color: #fff;
+	margin: 5px;
+	float: left;
+	/*border-radius: 1em;*/
+	border: 1px solid #fff;
+	box-shadow: 5px 5px 5px #ddd;
+}
+.containerpreview:hover {
+	background-color: #eef;
+	border: 1px solid #ddf;
+}
+.containerpreview  canvas{
+	padding: 0;
+    margin: 20px auto;
+    display: block;
+}
+.containerpreviewinfo {
+	width: 100%;
+	text-align: center;
+}
+#toolbar {
+	width: 200px;
+	height: 100vh;
+	float: left;
+    background-color: #ddd;
+}
+#containerfullview {
+	display: hidden;
+	background-color: #ffc;
+	width: auto;
+	height: 100vh;
+	background-color: #fff;
+	overflow: hidden;
+}

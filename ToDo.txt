@@ -16,6 +16,8 @@ After everything has loaded and is now visible on screen:
             => OnLoadingComplete(): replaces the "default" mesh
             => OnLoadingError(): ? ignore?
 
+
+test1
 LINKS:
 
 http://www.geofx.com/graphics/nehe-three-js/lessons01-08/lessons-01-08.html

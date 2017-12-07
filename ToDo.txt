@@ -16,8 +16,6 @@ After everything has loaded and is now visible on screen:
             => OnLoadingComplete(): replaces the "default" mesh
             => OnLoadingError(): ? ignore?
 
-
-test1
 LINKS:
 
 http://www.geofx.com/graphics/nehe-three-js/lessons01-08/lessons-01-08.html
@@ -27,3 +25,6 @@ https://jeromeetienne.github.io/threejsboilerplatebuilder/#builder
 https://threejs.org/examples/#canvas_interactive_cubes
 http://learningthreejs.com/blog/2011/09/16/performance-caching-material/
 http://bl.ocks.org/fabiovalse/2e8ae04bfce21af400e6#threex.domevent.js
+
+threejs template
+https://medium.com/@soffritti.pierfrancesco/how-to-organize-the-structure-of-a-three-js-project-77649f58fa3f

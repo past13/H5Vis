@@ -1,7 +1,4 @@
 
-const xmlType  = "xml";
-var xmlObj = {};
-
 
 
 
@@ -164,6 +161,7 @@ function loadContainerType(node) {
     pack.x = (parseInt(pack.minx) + parseInt(pack.maxx))/2;
     pack.y = (parseInt(pack.miny) + parseInt(pack.maxy))/2;
     pack.z = (parseInt(pack.minz) + parseInt(pack.maxz))/2;
+    //needcheck
     pack.rotx = node.find('rotation').attr('x') * (Math.PI/180);
     pack.roty = node.find('rotation').attr('y') * (Math.PI/180);
     pack.rotz = node.find('rotation').attr('z') * (Math.PI/180);
@@ -172,56 +170,88 @@ function loadContainerType(node) {
     return pack;
   }
 
+  // var s,
+  // NewsWidget = {
+  
+  //   settings: {
+  //     numArticles: 1,
+  //     articleList: 12,
+  //     moreButton: 32
+  //   },
+  
+  //   init: function() {
+  //     // kick things off
+  //     s = this.settings;
+  //   }
+  
+  // };
+
+    // function parseXML(file) {  
+    //     $.get(file, function(data) {                    
+    //         xmlObj = XML2jsobj(data.documentElement);   
+    //         console.log("data");     
+    //         return xmlObj;
+    //     }); 
+    // };
+
+
+    // //parse with third party lib XML2jsobj and returns global
+    // function parseXML(file) {  
+    //     $.get(file, function(data) {                    
+    //         xmlObj = XML2jsobj(data.documentElement);   
+    //         console.log("data");     
+    //         return xmlObj;
+    //     }); 
+    // };
+
+//switch for different file types? 
+const fileExtension  = "xml";
+var $XmlModel = {};
+var $containerrecipelist = {};
+var $recipestatistics = {};
+var $order = {};
+type = {};
 
 
 
 
-    // var MODULE = (function readRecipeFile(data) {
-    //     var my = {};
 
-    //     my = $.get('recipe.xml', function(data) {               
-    //         $xmlObj = XML2jsobj(data.documentElement);  
-    //         console.log($xmlObj);
-    //    });  
-    
-    //     return my;
-    // }(MODULE));
+function readRecipeFile (file){  
+  XmlModel = (function () {         
+    $.ajax({
+        async: false,
+        type: "GET",
+        global: false,
+        dataType: fileExtension,
+        url: file,
+        success: function (data) { xmlObj = XML2jsobj(data.documentElement); }
+    });          
 
- 
+    return { 
+            containerrecipelist: xmlObj.containerrecipelist,
+            order: xmlObj.order,
+            recipestatistics: xmlObj.recipestatistics,
+            type: xmlObj.type
+    }
+  }());
 
-    var recipe = (function (xmlObj) {
-         
-      console.log("4" + xmlObj); 
+$containerrecipelist = XmlModel.containerrecipelist;
+$recipestatistics = XmlModel.recipestatistics;
+$type = XmlModel.type;
 
-        return my;
-    }(recipe));
-    
-    console.log("4" + recipe); 
-
-    //parse with third party lib XML2jsobj and returns global
-    function parseXML(file) {  
-        $.get(file, function(data) {        
-            xmlObj = XML2jsobj(data.documentElement);         
-            return xmlObj;
-        }); 
-    };
-
-    //get xml Object from file
-    function readRecipeFile(file) {
-    $(document).ready(function () {
-        $.ajax({
-            type: "GET",
-            async: false,
-            url: file,
-            cache: false,
-            dataType: xmlType,
-            success: parseXML(file),
-            error: function() {
-                
-                // setStatus('Error: could not read recipe.xml');
-                alert("An error occurred while processing XML file.");
-              }
-        });
-    });
+return XmlModel;
 }
-console.log("3" + xmlObj); 
+
+
+var testXml = readRecipeFile("recipe.xml");
+$XmlModel = testXml;
+
+
+console.log($XmlModel);
+
+
+  
+
+
+
+

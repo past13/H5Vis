@@ -247,7 +247,6 @@ var testXml = readRecipeFile("recipe.xml");
 $XmlModel = testXml;
 
 
-console.log($XmlModel);
 
 
   

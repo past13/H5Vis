@@ -159,14 +159,20 @@ function create3DMeshes() {
   // prepare container type meshes
   for (var key in $recipe.order.containertypelist) if ($recipe.order.containertypelist.hasOwnProperty(key)) {
     var containertype = $recipe.order.containertypelist[key];
-
+    
     // console.log(containertype);
+    
     containertype.geometry = new THREE.BoxBufferGeometry( containertype.pw, containertype.ph, containertype.pl );
+    
     containertype.material = new THREE.MeshStandardMaterial( { color: 0xa0a0a0 }); //Laurynas 29d added   ,vertexColors: THREE.FaceColors
     containertype.offset = { x: -containertype.ol, y: -containertype.oh/2, z: -containertype.ow };
+    
 
     var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial() );
   }
+// console.log("containertype");
+  
+// console.log(containertype);
 
   // prepare orderline meshes
   for (var key in $recipe.order.orderlinelist) if ($recipe.order.orderlinelist.hasOwnProperty(key)) {
@@ -174,6 +180,9 @@ function create3DMeshes() {
     orderline.geometry = new THREE.BoxBufferGeometry( orderline.width, orderline.height, orderline.length );
     orderline.material = new THREE.MeshStandardMaterial( { color: orderline.color } );
   }
+  // console.log("orderline");
+  
+  // console.log(orderline);
 
   // create container scenes
   for (var key in $recipe.containerlist) if ($recipe.containerlist.hasOwnProperty(key)) {
@@ -206,7 +215,7 @@ function create3DMeshes() {
 
       
     }
-  }
+  }  
 }
 
 function createContainerPreviews() {
@@ -218,20 +227,96 @@ function createContainerPreviews() {
   }
 }
 
+function customizeXmlObj(jsObj){
+  
+  var resultList = {};
+
+  var GOLDEN_RATIO_CONJUGATE = 0.618033988749895;
+  var _h = 0;
+  var _v = 0;
+
+  console.log("object customize");
+  // console.log(jsObj);
+
+  var myObject = {};
+  var myVar = "vardas";
+  myObject[myVar] = "domeny"; 
+
+  var orderlinelist = jsObj.order.orderlinelist;
+
+  var orderLine = jsObj.order.orderlinelist.orderline;
+
+  
+
+  // var keyNames = Object.key(orderLine);
+
+
+  for (var i = 0, l = orderLine.length; i < l; i++) {
+    var productCode = orderLine[i].productcode; 
+    orderLine[i].id = productCode;
+
+    resultList[ orderLine.id ] = orderLine;
+    
+
+  //   if (orderLine.hasOwnProperty(key)) {
+  //     console.log(key);
+  // }
+  }
+
+
+  console.log( resultList);
+
+    // Object.keys(orderLine).each(function(data) {
+    //   console.log(data);
+    // });    
+
+    // Object.defineProperty(orderLine, productCode, Object.getOwnPropertyDescriptor(orderLine, old_key));
+
+    // Object.keys(orderLine) = productCode;
+
+  //   Object.keys(orderLine).forEach(function(key) {
+  //     new_obj[key] = orderLine[key];
+  // });
+
+  
+
+  console.log(orderLine);
+
+
+
+
+}
+
+
+
 function readRecipeFile(file) {
   setStatus('Loading recipe...');
 
   //laurynas change to other method not parseXML
   $.get('recipe.xml', function(data) {
-    var xml = $( $.parseXML( data ) );
-    var recipeNode = xml.find('recipe').first();
-	  if (recipeNode.text() == "") {
-      var xml = $( data );
-      var recipeNode = xml.find('recipe').first();
-	  }
-    $recipe = loadRecipe( recipeNode );
+    
 
-	  create3DMeshes();
+    var xmlObj = XML2jsobj(data.documentElement);    
+
+    var addCustomParameters = customizeXmlObj(xmlObj);
+
+
+    $recipe = xmlObj;
+
+    
+
+    // var xml = $( $.parseXML( data ) );
+
+  
+    // var recipeNode = xml.find('recipe').first();
+	  // if (recipeNode.text() == "") {
+    //   var xml = $( data );
+    //   var recipeNode = xml.find('recipe').first();
+	  // }
+    // $recipe = loadRecipe( recipeNode );
+    
+
+    create3DMeshes();
     createContainerPreviews();
     
     

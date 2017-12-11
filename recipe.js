@@ -234,53 +234,65 @@ function customizeXmlObj(jsObj){
   var GOLDEN_RATIO_CONJUGATE = 0.618033988749895;
   var _h = 0;
   var _v = 0;
+  
 
-  console.log("object customize");
-  // console.log(jsObj);
-
-  var myObject = {};
-  var myVar = "vardas";
-  myObject[myVar] = "domeny"; 
 
   var orderlinelist = jsObj.order.orderlinelist;
-
   var orderLine = jsObj.order.orderlinelist.orderline;
 
+
+  //console.log(orderLine);
+
+  var productcode;
+
+
+
+ 
+  //iterating properties
+var testas = orderLine[0];
+
+for (var item in testas) {
+console.log(item);
+
+
+}
+
+ 
   
 
-  // var keyNames = Object.key(orderLine);
+    //for (i = 0; i < orderLine.length; i++) {
+      //console.log("a");
+      
+      //console.log("dirbam dar cia");
 
+      for (var orderiux in orderLine) {
+      
+        var oldValue = orderiux.toString();
+        var newValue = orderLine[orderiux].productcode;
+       
+        
+        orderLine[newValue] = orderLine[oldValue];
+        
+        console.log(typeof(oldValue));
+        console.log(typeof(newValue));
+        delete orderLine.orderiux;
 
-  for (var i = 0, l = orderLine.length; i < l; i++) {
-    var productCode = orderLine[i].productcode; 
-    orderLine[i].id = productCode;
+        //listas = orderLine[productcode];
+        //delete orderLine.oldValue;
+        console.log(orderLine);
+        
+        //return listas
+      }
+     
 
-    resultList[ orderLine.id ] = orderLine;
-    
+ // }
 
-  //   if (orderLine.hasOwnProperty(key)) {
-  //     console.log(key);
-  // }
-  }
+        
 
+       
 
-  console.log( resultList);
-
-    // Object.keys(orderLine).each(function(data) {
-    //   console.log(data);
-    // });    
-
-    // Object.defineProperty(orderLine, productCode, Object.getOwnPropertyDescriptor(orderLine, old_key));
-
-    // Object.keys(orderLine) = productCode;
-
-  //   Object.keys(orderLine).forEach(function(key) {
-  //     new_obj[key] = orderLine[key];
-  // });
-
+//console.log(orderLine);
   
-
-  console.log(orderLine);
 
 
 

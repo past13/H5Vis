@@ -227,77 +227,135 @@ function createContainerPreviews() {
   }
 }
 
+
+
+
+function createdefaultmesh( orderline ) {
+  
+  orderline.mesh = {};
+}
+
+var GOLDEN_RATIO_CONJUGATE = 0.618033988749895;
+var _h = 0;
+var _v = 0;
+
+
+function getNextColor() {
+  var _color = new THREE.Color();
+  _color.setHSL(_h, 1.00, 0.50 + 0.30 * _v);
+  _h = (_h + GOLDEN_RATIO_CONJUGATE) % 1;
+  _v = (_v + GOLDEN_RATIO_CONJUGATE) % 1;
+  return _color;
+}
+
+var orderLineList = [];
+
 function customizeXmlObj(jsObj){
+ 
+  var templist = jsObj.order.orderlinelist.orderline;
   
-  var resultList = {};
+  for (var key in templist) {
+      var orderline = templist[key]; 
+      orderline.color = getNextColor();
+      createdefaultmesh(orderline);
+      orderLineList[orderline.productcode] = orderline;
+  }
 
-  var GOLDEN_RATIO_CONJUGATE = 0.618033988749895;
-  var _h = 0;
-  var _v = 0;
+  // console.log(orderLineList);
+  var containerTypeCode = jsObj.containerrecipelist.containerrecipe;
+
+  // console.log(Object.entries(containerTypeCode));
+
+
+
+
+
+  for (var item in containerTypeCode){
+    
+    var package = containerTypeCode[item].physicalresult.package;
+    
+    // console.log(package);
+    for (var item2 in package[item]) {
+       console.log(package[item][item2]);
+
+
+      // var newArray = containerTypeCode[item][item2].statistic;
+
+      
+        
+      
+
+      if ( typeof(newArray) == "object") {
+
+        // console.log(newArray);
+        for (var pack in newArray) {
+          
+
+
+
+        }
+      }      
+    }
+  }
+
+
+
+    // console.log(containerTypeCode[i]);
+
+    // if ( typeof(containerTypeCode) == "object") {
+
+    // }
+    
+    // for (var j = 0; j < containerTypeCode[i].length; j++) {
+
+    //   console.log(containerTypeCode[j]);
+
+    // }
   
 
 
-  var orderlinelist = jsObj.order.orderlinelist;
-  var orderLine = jsObj.order.orderlinelist.orderline;
+  // for (var i=0; i<containerTypeCode.Data.length; i++) {
+  //   console.log(containerTypeCode.Data[i]);
+  // }
+
+  //   var printArray = function(containerTypeCode) {
+  //     if ( typeof(containerTypeCode) == "object") {
+  //         for (var i = 0; i < containerTypeCode.length; i++) {
+  //             printArray(containerTypeCode[i]);
+  //         }
+  //     }
+  //     else document.write(containerTypeCode);
+  // }
+        
+        
+    
 
 
-  //console.log(orderLine);
 
-  var productcode;
+  // for (var key in containerTypeCode) {
+  //   var containerType = containerTypeCode[key];
 
+  //   console.log(Object.entries(containerTypeCode));
+  // }
 
 
  
-  //iterating properties
-var testas = orderLine[0];
 
-for (var item in testas) {
-console.log(item);
+    
+  var myStringArray = ["Hello","World"];  
 
 
-}
+  var containerTypeCode = containerTypeCode.length;
+
+  // console.log(containerTypeCode);
+
+
+  
 
  
-  
-
-    //for (i = 0; i < orderLine.length; i++) {
-      //console.log("a");
-      
-      //console.log("dirbam dar cia");
-
-      for (var orderiux in orderLine) {
-      
-        var oldValue = orderiux.toString();
-        var newValue = orderLine[orderiux].productcode;
-       
-        
-        orderLine[newValue] = orderLine[oldValue];
-        
-        console.log(typeof(oldValue));
-        console.log(typeof(newValue));
-        delete orderLine.orderiux;
-
-        //listas = orderLine[productcode];
-        //delete orderLine.oldValue;
-        console.log(orderLine);
-        
-        //return listas
-      }
-     
-
- // }
-
-        
-
-       
-
-//console.log(orderLine);
-  
-
-
-
 
 }
+
 
 
 
@@ -313,20 +371,7 @@ function readRecipeFile(file) {
     var addCustomParameters = customizeXmlObj(xmlObj);
 
 
-    $recipe = xmlObj;
-
-    
-
-    // var xml = $( $.parseXML( data ) );
-
-  
-    // var recipeNode = xml.find('recipe').first();
-	  // if (recipeNode.text() == "") {
-    //   var xml = $( data );
-    //   var recipeNode = xml.find('recipe').first();
-	  // }
-    // $recipe = loadRecipe( recipeNode );
-    
+    $recipe = xmlObj;    
 
     create3DMeshes();
     createContainerPreviews();
@@ -342,3 +387,52 @@ function readRecipeFile(file) {
     setStatus('Error: could not read recipe.xml');
   })
 }
+
+
+
+
+/*
+class Rectangle {
+
+  constructor (w, h) {
+    this.width = w;
+    this.height = h;
+    this.color = 234523;
+  }
+
+  getarea() {
+    return this.width * this.height;
+  }
+}
+
+var r = new Rectangle(10, 20);
+r.getarea();
+*/
+/*
+var r = { 
+  width: 20,
+  height:10, 
+  
+  getarea() { 
+    return this.width * this.height; 
+  } 
+}
+
+r.getvolume = new function() { this.height * ... }
+r.getvolume();
+*/
+
+
+  //  Object.entries(orderLine).forEach(([key, value]) => {
+
+  //   var oldValue = key.toString();
+  //   var newValue = orderLine[key].productcode.toString();
+
+  //   var temp = ${key}
+
+
+  //   console.log(newValue);
+
+  //   // console.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
+  //   });
+

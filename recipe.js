@@ -211,7 +211,6 @@ function create3DMeshes() {
       // line.rotation.copy(mesh.rotation);
       // container.mesh.add( line );      
     }
-    // console.log(container);
   }  
 }
 
@@ -245,43 +244,79 @@ function getNextColor() {
   return _color;
 }
 
-var orderLineList = [];
+var orderlinelist = [];
+var packcontainerlist = [];
+
+function customizeOrderLine(orderline) {
+    //add color 
+    orderline.color = getNextColor();
+    //create default mesh
+    createDefaultMesh(orderline);  
+  return orderline;
+}
+
+var container = {};
 
 function customizeXmlObj(jsObj){ 
-  var templist = jsObj.order.orderlinelist.orderline;  
-  for (var key in templist) {
-    var orderline = templist[key]; 
-    //generate new color and add to mesh
-    orderline.color = getNextColor();
-    //create default
-    createDefaultMesh(orderline);
-    //swap rename id with productcode
-    orderLineList[orderline.productcode] = orderline;
-  }  
-  jsObj.order.orderlinelist = orderLineList;
-  
-  var orderLineListNew = jsObj.order.orderlinelist;
-  
-
+  // todo: module pattern?
   var containerTypeCode = jsObj.containerrecipelist.containerrecipe;
+  var templist = jsObj.order.orderlinelist.orderline; 
   
+  //assign productcode to orderlineid //todo: move away
+  for (var item in containerTypeCode) {       
+    packcontainerlist = containerTypeCode[item].physicalresult.package;
+
+    for (var pack in packcontainerlist) {    
+      if (packcontainerlist[pack].orderlineid == "0") {
+        packcontainerlist[pack].orderlineid = packcontainerlist[pack].productcode; 
+      }  
+    }
+  } 
+  container.packagelist = {};
+  // console.log(containerTypeCode);
+
+  // container.packagelist = {};
+  $.each(packcontainerlist, (function(key, value, templist) {
+    var pack = customizeOrderLine( $(this) );   
+    console.log(pack[key].orderlineid);
+
+    // packcontainerlist.orderline = templist[pack.productcode];   
+
+    // container.packagelist[ pack.productcode ] = pack;
+
+   
+    // packcontainerlist = orderlinelist[pack.orderlineid];
+  }));
+  
+  // console.log( container);
+
+
+ 
+
+  // jsObj.order.orderlinelist = orderLineList;
+
+  for (var key in templist) {
+    var orderline = customizeOrderLine(templist[key]); 
+  
+    // var orderLineList1 = jsObj[orderline.index];
+   
+// console.log(orderline);
     
-  console.log(orderLineListNew);
-  console.log(containerTypeCode);
+    // packcontainerlist[pack].orderlinelist  = orderline;
+   }
 
-
+  //recalculate rotation number ir orderline //todo: move away
   containerTypeCode.map(function(x) {
     var z = x.physicalresult.package;
+
     z.map(function(x) {
       x.rotation.x *=  (Math.PI/180);
       x.rotation.y *=  (Math.PI/180);  
-      x.rotation.z *=  (Math.PI/180);  
-
-      if (x.orderlineid == "0") {
-        x.orderlineid = orderline.productcode;
-      }
+      x.rotation.z *=  (Math.PI/180);       
     });    
   });
+  // console.log(jsObj);
+  
   return jsObj;
 }
 

@@ -244,8 +244,9 @@ function getNextColor() {
   return _color;
 }
 
-var orderlinelist = [];
-var packcontainerlist = [];
+
+
+
 
 function customizeOrderLine(orderline) {
     //add color 
@@ -255,67 +256,205 @@ function customizeOrderLine(orderline) {
   return orderline;
 }
 
+function toObject(arr) {
+  var rv = {};
+  for (var i = 0; i < arr.length; ++i)
+    rv[i] = arr[i];    
+  return rv;
+}
+
+var orderlinelist = [];
+var orderlineforpack = [];
+
+var orderobjectList = {};
+
+var packcontainerlist = [];
+var orderspacks =[];
+
+var orders  = [];
+
+
 var container = {};
+container.packagelist = {}; 
 
 function customizeXmlObj(jsObj){ 
-  // todo: module pattern?
+  
+  
+  
+  // todo: module pattern? 3 items
   var containerTypeCode = jsObj.containerrecipelist.containerrecipe;
   var templist = jsObj.order.orderlinelist.orderline; 
+  var temporderlinelist = jsObj.order.orderlinelist;
   
-  //assign productcode to orderlineid //todo: move away
-  for (var item in containerTypeCode) {       
-    packcontainerlist = containerTypeCode[item].physicalresult.package;
-
-    for (var pack in packcontainerlist) {    
-      if (packcontainerlist[pack].orderlineid == "0") {
-        packcontainerlist[pack].orderlineid = packcontainerlist[pack].productcode; 
-      }  
-    }
-  } 
-  container.packagelist = {};
-  // console.log(containerTypeCode);
-
-  // container.packagelist = {};
-  $.each(packcontainerlist, (function(key, value, templist) {
-    var pack = customizeOrderLine( $(this) );   
-    console.log(pack[key].orderlineid);
-
-    // packcontainerlist.orderline = templist[pack.productcode];   
-
-    // container.packagelist[ pack.productcode ] = pack;
-
-   
-    // packcontainerlist = orderlinelist[pack.orderlineid];
-  }));
-  
-  // console.log( container);
-
-
- 
-
-  // jsObj.order.orderlinelist = orderLineList;
-
   for (var key in templist) {
-    var orderline = customizeOrderLine(templist[key]); 
-  
-    // var orderLineList1 = jsObj[orderline.index];
-   
-// console.log(orderline);
+    var orderline = templist[key]; 
+    //generate new color and add to mesh
+    orderline.color = getNextColor();
+    //create default
+    // createDefaultMesh(orderline);
+    //swap rename id with productcode
+    orderlinelist[orderline.productcode] = orderline;   
     
-    // packcontainerlist[pack].orderlinelist  = orderline;
-   }
+  } 
+  jsObj.order.orderlinelist = orderlinelist;
+  var defaultorderlist = jsObj.order.orderlinelist;
 
-  //recalculate rotation number ir orderline //todo: move away
-  containerTypeCode.map(function(x) {
-    var z = x.physicalresult.package;
 
-    z.map(function(x) {
-      x.rotation.x *=  (Math.PI/180);
-      x.rotation.y *=  (Math.PI/180);  
-      x.rotation.z *=  (Math.PI/180);       
-    });    
-  });
-  // console.log(jsObj);
+
+ for (let i=0, len=containerTypeCode.length; i<len; i++){
+  var pack = containerTypeCode[i].physicalresult.package;   
+  console.log("object")
+  for (let item in pack) {
+  console.log("pack")  
+    
+    if (pack[item].orderlineid == "0") {            
+      pack[item].orderlineid = pack[item].productcode;    
+    }       
+    pack[item].orderline = defaultorderlist[pack[item].productcode];
+    container.packagelist[ pack[item].index ] = pack[i]; 
+
+    
+  }  
+ }
+ console.log("pack", container)  
+ 
+    let rows = containerTypeCode.length;
+    
+    // console.log(templist)
+
+
+
+  // assign productcode to orderlineid //todo: move away
+  for (var item in containerTypeCode) {  
+    
+    
+    // packcontainerlist = containerTypeCode[item]; //.physicalresult.package;  
+    //  console.log(packcontainerlist)
+
+    // console.log("1", containerTypeCode[item])
+
+
+
+    // console.log("container", packcontainerlist);
+  for (var pack in containerTypeCode[item]) { 
+    
+          // packs = packcontainerlist[pack].package;
+          // console.log(containerTypeCode[item][pack].package)
+    // console.log("pack", packcontainerlist[pack]);
+          // if (packcontainerlist[pack].orderlineid == "0") {
+            
+          //   packcontainerlist[pack].orderlineid = packcontainerlist[pack].productcode;         
+          // }  
+    
+          //  container.order[packcontainerlist[pack].productcode] = packcontainerlist[pack];
+          // orders.containerlist.orders[packcontainerlist[pack].productcode] = packcontainerlist[pack];
+        }
+
+
+    
+    // orders.push(packcontainerlist);
+  } 
+  
+    // console.log(orderspacks);
+  
+//  console.log(jsObj.order.orderlinelist)
+//  console.log(templist)
+ 
+  // for (var key in templist) {
+  //   var orderline = templist[key]; 
+  //   //generate new color and add to mesh
+  //   orderline.color = getNextColor();
+  //   //create default
+  //   // createDefaultMesh(orderline);
+  //   //swap rename id with productcode
+  //   orderlinelist[orderline.productcode] = orderline;    
+  // }  
+
+  // //override orderlinelist
+  // jsObj.order.orderlinelist = orderlinelist;
+  
+  // var neworderlinelist = jsObj.order.orderlinelist ;
+  
+  
+
+  // for (var key in packcontainerlist) {
+  //   var line = packcontainerlist[key];
+  //   //all producttypelist
+  //   // console.log(neworderlinelist[line.productcode])
+
+  //   orderlineforpack = neworderlinelist[line.productcode];
+    
+    
+  // }
+
+  
+
+  //   var myList = Object.keys(neworderlinelist).map(function(key){
+  //     return {label: neworderlinelist[key]}
+  // });
+
+
+  
+
+//   var MainObj = {
+    
+//       // prop1: "prop1MainObj",
+      
+//       Obj1: {
+//         // prop1: "prop1Obj1",
+//         // prop2: "prop2Obj1",    
+//         Obj2: {
+//           prop1: "hey you",
+//           prop2: "prop2Obj2"
+//         }
+//       },
+        
+//       Obj3: {
+//         prop1: "prop1Obj3",
+//         prop2: "prop2Obj3"
+//       },
+      
+//       Obj4: {
+//         prop1: true,
+//         prop2: 3
+//       }  
+//     };
+    
+//     // console.log(MainObj);
+
+  
+  
+//   // var orderlinelist = toObject(jsObj.order.orderlinelist);
+
+
+
+
+
+//   // $.each(packcontainerlist, (function(key, value, templist) {
+//   //   var pack = customizeOrderLine( $(this) );   
+
+//   //   // packcontainerlist.orderline = templist[pack.productcode];   
+
+//   //   // container.packagelist[ pack.productcode ] = pack;
+
+   
+//   //   // packcontainerlist = orderlinelist[pack.orderlineid];
+//   // }));
+
+
+
+
+//   //recalculate rotation number ir orderline //todo: move away
+//   containerTypeCode.map(function(x) {
+//     var z = x.physicalresult.package;
+
+//     z.map(function(x) {
+//       x.rotation.x *=  (Math.PI/180);
+//       x.rotation.y *=  (Math.PI/180);  
+//       x.rotation.z *=  (Math.PI/180);       
+//     });    
+//   });
+//   // console.log(jsObj);
   
   return jsObj;
 }
@@ -330,7 +469,7 @@ function readRecipeFile(file) {
     var recipe = customizeXmlObj(xmlObj);    
     $recipe = recipe;
     
-    create3DMeshes();
+    // create3DMeshes();
     // createContainerPreviews();
 
     // update();

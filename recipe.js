@@ -155,76 +155,75 @@ function loadRecipe(node) {
 
 function create3DMeshes() {
   setStatus('Creating 3D objects...');
-  // console.log($recipe);
-
   var containerType = $recipe.order.containertypelist;
-
-
+ 
+  
   // prepare container type meshes
   for (var key in $recipe.order.containertypelist) if ($recipe.order.containertypelist.hasOwnProperty(key)) {
     var containertype = $recipe.order.containertypelist[key];
 
-    containertype.geometry = new THREE.BoxBufferGeometry( containertype.physicalsize.width, containertype.physicalsize.height, containertype.physicalsize.length );
-    
+    containertype.geometry = new THREE.BoxBufferGeometry( containertype.physicalsize.width, containertype.physicalsize.height, containertype.physicalsize.length );    
     containertype.material = new THREE.MeshStandardMaterial( { color: 0xa0a0a0 });
     //todo: check with change xyz parameters
     containertype.offset = { x: -containertype.contentoffset.deltax, y: -containertype.contentoffset.deltaz/2, z: -containertype.contentoffset.deltay }; 
     var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial() );
   }
 
-  // // prepare orderline meshes
-  // for (var key in $recipe.order.orderlinelist) if ($recipe.order.orderlinelist.hasOwnProperty(key)) {
-  //   var orderline = $recipe.order.orderlinelist[key];
-    
-  //   orderline.geometry = new THREE.BoxBufferGeometry( orderline.size.width, orderline.size.height, orderline.size.length );
-  //   orderline.material = new THREE.MeshStandardMaterial( { color: orderline.color } );
-  // }
+  // prepare orderline meshes
+  for (var key in $recipe.order.orderlinelist.orderline) if ($recipe.order.orderlinelist.orderline.hasOwnProperty(key)) {
+    var orderline = $recipe.order.orderlinelist.orderline[key];
+
+    orderline.geometry = new THREE.BoxBufferGeometry( orderline.size.width, orderline.size.height, orderline.size.length );
+    orderline.material = new THREE.MeshStandardMaterial( { color: orderline.color } );
+  }
  
   // create container scenes
   for (var key in $recipe.containerrecipelist.containerrecipe) if ($recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
-    var container = $recipe.containerrecipelist.containerrecipe[key];    
+    var container = $recipe.containerrecipelist.containerrecipe[key];   
+  
     container.mesh = new THREE.Mesh();
 
     var mesh;
     mesh = new THREE.Mesh(containerType.geometry, containertype.material);
     mesh.position.set(containertype.offset.x, containertype.offset.y, containertype.offset.z);
-    mesh.castShadow = false;
+    //todo: BUG move to another place !!!dont change cas and receive shadow!!!
+    mesh.castShadow = true;
     mesh.receiveShadow = true;
-    container.mesh.add( mesh );
-
-    
+    container.mesh.add( mesh );    
 
     for (var p in container.physicalresult.package) if (container.physicalresult.package.hasOwnProperty(p)) {
       var pack = container.physicalresult.package[p];
+    
+      mesh = new THREE.Mesh(pack.orderline.geometry, pack.orderline.material);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      mesh.position.set(pack.x, pack.z, -pack.y);
+      mesh.rotation.set(pack.rotx, pack.rotz, pack.roty);
+      container.mesh.add(mesh);
 
-      // console.log(pack);
-      // mesh = new THREE.Mesh(pack.orderline.geometry, pack.orderline.material);
-      // mesh.castShadow = true;
-      // mesh.receiveShadow = true;
-      // mesh.position.set(pack.x, pack.z, -pack.y);
-      // mesh.rotation.set(pack.rotx, pack.rotz, pack.roty);
-      // container.mesh.add(mesh);
-
-      // var edges = new THREE.EdgesGeometry( pack.orderline.geometry );
-      // var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000, lineWidth: 3 } ) );
-      // line.position.copy(mesh.position);
-      // line.rotation.copy(mesh.rotation);
-      // container.mesh.add( line );      
+      var edges = new THREE.EdgesGeometry( pack.orderline.geometry );
+      //todo: BUG lineWidth is not a property of this material
+      var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000, lineWidth: 3 } ) );
+      line.position.copy(mesh.position);
+      line.rotation.copy(mesh.rotation);
+      container.mesh.add( line );      
     }
   }  
 }
 
 function createContainerPreviews() {
   setStatus('Creating previews...');
-
-  for (var key in $recipe.containerlist) if ($recipe.containerlist.hasOwnProperty(key)) {
-	var container = $recipe.containerlist[key];
+  
+  for (var key in $recipe.containerrecipelist.containerrecipe) if ($recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
+  var container = $recipe.containerrecipelist.containerrecipe[key];
+  console.log(container)
+  
 	createContainerPreview('#containerpreviews', container);
   }
 }
 
 //todo: create abstract class for creating default meshes
-function createDefaultMesh( orderline ) {  
+function createDefaultMesh(orderline) {  
   //todo: add default meshes
   orderline.mesh = {};
     // prepare orderline meshes    
@@ -236,6 +235,7 @@ var GOLDEN_RATIO_CONJUGATE = 0.618033988749895;
 var _h = 0;
 var _v = 0;
 
+//recreate all methods abstract
 function getNextColor() {
   var _color = new THREE.Color();
   _color.setHSL(_h, 1.00, 0.50 + 0.30 * _v);
@@ -243,27 +243,26 @@ function getNextColor() {
   _v = (_v + GOLDEN_RATIO_CONJUGATE) % 1;
   return _color;
 }
-
-//recreate all methods abstract
 function defaultMeshColors(orderlinelist) {   
   var list = orderlinelist.orderline;
   for (var order in list) {
-    //add defaulcolor
+    // add defaulcolor
     list[order].color = getNextColor();
-    //create default mesh
+    // create default mesh
     createDefaultMesh(list[order]);    
   }  
   return list;
 }
-function arrayToObject(temporderlinelist){ 
+function arrayToObject(temporderlinelist, jsObj){ 
   //convert from array to object list  
   var temporderlineforpack = {};
   temporderlinelist.reduce(function(obj, value, key) {
-    temporderlineforpack[value.productcode] = value;    
+    temporderlineforpack[value.productcode] = value;        
   }, {});  
+  //todo move away assignment
+  jsObj.order.orderlinelist.orderline = temporderlineforpack;  
   return temporderlineforpack;
 }
-
 function packageorders(orderslist, containerTypeCode){    
   var container = {};
   $.each( containerTypeCode, function( key, value ) {
@@ -273,13 +272,9 @@ function packageorders(orderslist, containerTypeCode){
         pack[key].orderline = orderslist[pack[key].orderlineid];   
       });
     container[ pack[key].index ] = pack;
-
-    // console.log(container[ pack[key].index ])
-  });
-  
+  });  
   return container;
 }  
-
 function recalculateRotation(packagelist) {
   // this.packagelist = packagelist;  
   $.each( packagelist, function( key, value ) {
@@ -291,17 +286,16 @@ function recalculateRotation(packagelist) {
   });
   return packagelist;
 }
-
 function customizeXmlObj(jsObj) {  
     //todo: use module pattern   
     this.jsObj = jsObj; 
     var containerTypeCode = jsObj.containerrecipelist.containerrecipe;
     var temporderlinelist = jsObj.order.orderlinelist;
-    
+
     //add default colors and meshes for orderlines
     var orderlinewithmeshcolor = defaultMeshColors(temporderlinelist);
     //prepare orderlist (arrayToObject)
-    var orderslist = arrayToObject(orderlinewithmeshcolor);
+    var orderslist = arrayToObject(orderlinewithmeshcolor, jsObj);
     //modife order properties and add to package
     var packagelist = packageorders(orderslist, containerTypeCode);     
     //recalculate rotation property in pack
@@ -319,9 +313,8 @@ function readRecipeFile(file) {
     var recipe = customizeXmlObj(xmlObj);    
     $recipe = recipe;
     
-    // console.log(recipe);
-    // create3DMeshes();
-    // createContainerPreviews();
+    create3DMeshes();
+    createContainerPreviews();
 
     // update();
 

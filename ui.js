@@ -219,41 +219,14 @@ var orderlinelist1 = $recipe;
 //4B04433A-E580-43AF-9917-CEEA3FA71BA3 
 
 //get cointainer by ID
-var containerById = _.get($recipe.containerlist, containerIndex);
-
-var tags = ['mesh', 'children'];
-
-var uiidExample = '4B04433A-E580-43AF-9917-CEEA3FA71BA3';
-
-
-
-var zaz = _.get(containerById, tags);
-
-
-
-var vaz = _.get(zaz, uiidExample);
-
-
-// console.log(zaz);
-
-
-
-
-
-var recipe = $recipe.containerlist;
-
-
-// var value;
-// var value = Object.keys(value);
-}
+// var containerById = _.get($recipe.containerlist, containerIndex);
+// var tags = ['mesh', 'children'];
+// var uiidExample = '4B04433A-E580-43AF-9917-CEEA3FA71BA3';
+// var zaz = _.get(containerById, tags);
+// var vaz = _.get(zaz, uiidExample);
 
 function update()
 { 
-
-
-  // console.log(mouse);
-
-  console.log("update");
   // console.log(mouse);
   // var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
   // vector.unproject(camera);
@@ -272,20 +245,6 @@ function update()
   var intersects = ray.intersectObjects(targetList , true);
 
   console.log(intersects);
-
-
-
-
-  // raycaster.setFromCamera( mouse, camera );
-  
-  // intersects = raycaster.intersectObjects( targetList , true );
-  
-  // console.log(intersects);
-  // console.log(targetList);
-
-  // for (var i = 0, len = intersects.length; i < len; i++) {
-  //   console.log(intersects[i]);
-  // }
 
 
   var details = getMeshDetails(intersects[0].object);

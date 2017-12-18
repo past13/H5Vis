@@ -155,9 +155,7 @@ function loadRecipe(node) {
 
 function create3DMeshes() {
   setStatus('Creating 3D objects...');
-  var containerType = $recipe.order.containertypelist;
- 
-  
+    
   // prepare container type meshes
   for (var key in $recipe.order.containertypelist) if ($recipe.order.containertypelist.hasOwnProperty(key)) {
     var containertype = $recipe.order.containertypelist[key];
@@ -180,11 +178,11 @@ function create3DMeshes() {
   // create container scenes
   for (var key in $recipe.containerrecipelist.containerrecipe) if ($recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
     var container = $recipe.containerrecipelist.containerrecipe[key];   
-  
+
     container.mesh = new THREE.Mesh();
 
     var mesh;
-    mesh = new THREE.Mesh(containerType.geometry, containertype.material);
+    mesh = new THREE.Mesh(container.containerlist.geometry, container.containerlist.material);
     mesh.position.set(containertype.offset.x, containertype.offset.y, containertype.offset.z);
     //todo: BUG move to another place !!!dont change cas and receive shadow!!!
     mesh.castShadow = true;
@@ -198,10 +196,12 @@ function create3DMeshes() {
       mesh.castShadow = true;
       mesh.receiveShadow = true;
       mesh.position.set(pack.x, pack.z, -pack.y);
-      mesh.rotation.set(pack.rotx, pack.rotz, pack.roty);
+      mesh.rotation.set(pack.rotation.x, pack.rotation.z, pack.rotation.y);
       container.mesh.add(mesh);
 
-      var edges = new THREE.EdgesGeometry( pack.orderline.geometry );
+      var edges = new THREE.EdgesGeometry( pack.orderline.geometry ); //missing sphere parameters
+      console.log(mesh)
+
       //todo: BUG lineWidth is not a property of this material
       var line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000, lineWidth: 3 } ) );
       line.position.copy(mesh.position);
@@ -216,7 +216,6 @@ function createContainerPreviews() {
   
   for (var key in $recipe.containerrecipelist.containerrecipe) if ($recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
   var container = $recipe.containerrecipelist.containerrecipe[key];
-  console.log(container)
   
 	createContainerPreview('#containerpreviews', container);
   }
@@ -263,25 +262,40 @@ function arrayToObject(temporderlinelist, jsObj){
   jsObj.order.orderlinelist.orderline = temporderlineforpack;  
   return temporderlineforpack;
 }
-function packageorders(orderslist, containerTypeCode){    
+function packageorders(jsObj, orderslist, containerTypeCode){    
   var container = {};
-  $.each( containerTypeCode, function( key, value ) {
-    var pack = containerTypeCode[key].physicalresult.package; 
-      $.each( pack, function( key, value ) {
+
+  var containertypeslist = $.each( containerTypeCode, function( key, value ) {  
+    var containertype = jsObj.order.containertypelist.containertype;
+    var containerlist = containerTypeCode[key];
+
+    var containertypes = $.each( containertype, function( key, value ) {  
+      containerlist.containerlist = containertype;
+    });
+  });
+
+  var packagelist = $.each( containerTypeCode, function( key, value ) {
+    var pack = containerTypeCode[key].physicalresult.package;      
+      $.each( pack, function( key, value ) {        
       if (pack[key].orderlineid == "0") { pack[key].orderlineid = pack[key].productcode; }  
         pack[key].orderline = orderslist[pack[key].orderlineid];   
       });
     container[ pack[key].index ] = pack;
-  });  
+  }); 
   return container;
 }  
-function recalculateRotation(packagelist) {
+
+function recalculateCoordinates(packagelist) {
   // this.packagelist = packagelist;  
   $.each( packagelist, function( key, value ) {
     packagelist[key].map(function(pack) {       
         pack.rotation.x *=  (Math.PI/180);
         pack.rotation.y *=  (Math.PI/180);  
-        pack.rotation.z *=  (Math.PI/180);
+        pack.rotation.z *=  (Math.PI/180);        
+
+        pack.x = (parseInt(pack.position.x) + parseInt(pack.extent.x))/2;
+        pack.y = (parseInt(pack.position.y) + parseInt(pack.extent.y))/2;
+        pack.z = (parseInt(pack.position.z) + parseInt(pack.extent.z))/2;
     });
   });
   return packagelist;
@@ -297,9 +311,9 @@ function customizeXmlObj(jsObj) {
     //prepare orderlist (arrayToObject)
     var orderslist = arrayToObject(orderlinewithmeshcolor, jsObj);
     //modife order properties and add to package
-    var packagelist = packageorders(orderslist, containerTypeCode);     
+    var packagelist = packageorders(jsObj, orderslist, containerTypeCode);     
     //recalculate rotation property in pack
-    recalculateRotation(packagelist);
+    recalculateCoordinates(packagelist);
     return jsObj;
 }
 
@@ -313,6 +327,7 @@ function readRecipeFile(file) {
     var recipe = customizeXmlObj(xmlObj);    
     $recipe = recipe;
     
+
     create3DMeshes();
     createContainerPreviews();
 

@@ -15,7 +15,7 @@ var renderer, domEvents;
 var containerIndex, containerMesh;
 
 function createContainer3DPreview(parentid, container) {
-
+// console.log(container)
   var parentelement = document.getElementById(parentid);
   var previewwidth = parentelement.clientWidth;
   var previewheight = parentelement.clientHeight-100;
@@ -27,7 +27,6 @@ function createContainer3DPreview(parentid, container) {
   container.previewcamera.position.set(4000, 2000, 6000);
   container.previewcamera.up = new THREE.Vector3(0, 1, 0);
   container.previewcamera.lookAt(new THREE.Vector3(0, 500, 0));
-
 
   container.previewrenderer = new THREE.WebGLRenderer( {antialias: true, alpha: true, logarithmicDepthBuffer: false} );
   container.previewrenderer.setSize( previewwidth, previewheight );
@@ -58,7 +57,7 @@ function createContainer3DPreview(parentid, container) {
     container.previewscene.add( directionalLight );
 
     container.previewscene.scale.set( 1.0, 1.0, 1.0);
-  }
+  } 
 
   container.renderPreview = function() {
     container.previewrenderer.render(container.previewscene, container.previewcamera);
@@ -83,8 +82,8 @@ function createContainer3DPreview(parentid, container) {
 }
 
 function createContainerPreview(parentid, container) {
-
   var previewid = "container_" + container.index;
+
   $('<div class="containerpreview" id="' + previewid + '" />')
     .appendTo(parentid)
     .hover(function() { container.animatepreview = true; }, function() { container.animatepreview = false; })
@@ -100,14 +99,13 @@ function createContainerPreview(parentid, container) {
       $('#containerpreviews').hide();
       $('containerfullview').show();
     });
-
+console.log(container)
   createContainer3DPreview(previewid, container);
-  $('<div class="containerpreviewinfo">('+container.index+') '+container.containertype.code+'</div>').appendTo("#"+previewid);
+  $('<div class="containerpreviewinfo">('+container.index+') '+container.containertype+'</div>').appendTo("#"+previewid);
 }
 
 function createFullContainerView(container) {
-  console.log("3");
-
+  
   $("#fullview").remove();
   $('<div id="fullview"></div>').appendTo("#containerfullview");
   var parentelement = document.getElementById('containerfullview');
@@ -167,15 +165,15 @@ function createFullContainerView(container) {
     
     container.fullviewrenderer.render(container.fullviewscene, container.fullviewcamera);
    
-    // container.fullviewrenderer.update();
-    // if (container.shadowsinfullview)  // render again if we want shadows
-    //   container.fullviewrenderer.render(container.fullviewscene, container.fullviewcamera);
+    container.fullviewrenderer.update();
+    if (container.shadowsinfullview)  // render again if we want shadows
+      container.fullviewrenderer.render(container.fullviewscene, container.fullviewcamera);
 
   }
 
   container.animateFullView = function () {
     if (!container.showfull) return;
-    // container.mesh.rotation.y = (container.mesh.rotation.y + 0.01) % (Math.PI * 2);
+    container.mesh.rotation.y = (container.mesh.rotation.y + 0.01) % (Math.PI * 2);
         
     //laurynas
     document.addEventListener( 'mousedown', onDocumentMouseActions, false );
@@ -286,33 +284,6 @@ function update()
       //   }
       // }
       
-
-      // var result = 0;
-
-      // var numbers = [65, 44, 12, 4];
-      // var rezultatas = numbers.forEach(myFunction);
-
-    
-
-      // function myFunction(item,index,arr) {
-      //   arr[index] = item * 10;
-      //   // console.log(arr[index]);
-      // }
-
-    
-      // var aaa = meshas.children[0].children;
-      // console.log(aaa);
-
-      // console.log(meshas);
-      // console.log(child);
-      // console.log(exactMesh);
-      // console.log(INTERSECTED.material.color.getHex());
-     
-
-
-      
-
-
       // store color of closest object (for later restoration)
       INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
       // set a new color for closest object
@@ -330,7 +301,7 @@ function update()
 
   controls.update();
   // stats.update();
-
+}
  
 }
 

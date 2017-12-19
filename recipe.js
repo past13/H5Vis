@@ -270,7 +270,7 @@ function packageorders(jsObj, orderslist, containerTypeCode){
     var containerlist = containerTypeCode[key];
 
     var containertypes = $.each( containertype, function( key, value ) {  
-      containerlist.containerlist = containertype;
+    containerlist.containerlist = containertype;
     });
   });
 
@@ -319,8 +319,7 @@ function customizeXmlObj(jsObj) {
 
 function readRecipeFile(file) {
   setStatus('Loading recipe...');
-
-  //laurynas change to other method not parseXML
+ 
   $.get('recipe.xml', function(data) {
 
     var xmlObj = XML2jsobj(data.documentElement);    
@@ -375,14 +374,4 @@ r.getvolume = new function() { this.height * ... }
 r.getvolume();
 */
 
-
-  //  Object.entries(orderLine).forEach(([key, value]) => {
-
-  //   var oldValue = key.toString();
-  //   var newValue = orderLine[key].productcode.toString();
-
-  //   var temp = ${key}
-
-  //   // consooole.log(`${key} ${value}`); // "a 5", "b 7", "c 9"
-  //   });
 
